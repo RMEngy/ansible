@@ -1,0 +1,20 @@
+---
+- name: Copy docker compose for Torrserver
+  ansible.builtin.template:
+    src: "docker-compose.torrserver.yml.j2"
+    dest: "{{ torrserver_node_docker_compose_app }}/docker-compose.yml"
+    mode: '0600'
+    owner: root
+    group: root
+
+- name: Restart docker compose for Torrserver
+  community.docker.docker_compose_v2:
+    project_src: "{{ torrserver_node_docker_compose_app }}"
+    state: restarted
+    files:
+    - docker-compose.yml
+  register: __output_torrserver_restart
+
+- name: Show results restart
+  ansible.builtin.debug:
+    var: __output_torrserver_restart

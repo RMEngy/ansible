@@ -1,0 +1,7 @@
+---
+torrserver:
+  hosts:
+    prod-torrserver-01a:
+      ansible_host: 192.168.3.68
+      ansible_user: rmengy
+    
