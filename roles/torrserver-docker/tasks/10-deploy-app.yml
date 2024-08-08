@@ -6,14 +6,16 @@
     mode: '0600'
     owner: root
     group: root
+  register: __torrserver_node_docker_compose_file
 
 - name: Restart docker compose for Torrserver
   community.docker.docker_compose_v2:
     project_src: "{{ torrserver_node_docker_compose_app }}"
     state: restarted
     files:
-    - docker-compose.yml
+      - docker-compose.yml
   register: __output_torrserver_restart
+  when: __torrserver_node_docker_compose_file.changed
 
 - name: Show results restart
   ansible.builtin.debug:

@@ -1,9 +1,15 @@
 ---
-- name: Stop docker compose Torrserver
-  ansible.builtin.shell:
-    cmd: "docker compose down --remove-orphans"
-  args:
-    chdir: "{{ torrserver_node_docker_compose_app }}"
+- name: Down docker compose for Torrserver
+  community.docker.docker_compose_v2:
+    project_src: "{{ torrserver_node_docker_compose_app }}"
+    state: absent
+    files:
+    - docker-compose.yml
+  register: __output_torrserver_down
+
+- name: Show results down
+  ansible.builtin.debug:
+    var: __output_torrserver_down
 
 - name: Delete Torrserver dirs
   ansible.builtin.file:
