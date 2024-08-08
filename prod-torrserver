@@ -1,0 +1,6 @@
+---
+- name: Deploy Torrserver
+  hosts: torrserver
+  become: true
+  roles:
+    - torrserver-docker

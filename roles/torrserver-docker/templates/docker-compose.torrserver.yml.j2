@@ -1,0 +1,16 @@
+version: '3.3'
+
+services:
+    torrserver:
+        image: {{ torrserver_image }}:{{ torrserver_image_version }}
+        container_name: {{ torrserver_container_name }}
+        environment:
+{% for t in torrserver_environment %}
+            - {{ t }}
+{% endfor %}
+        volumes:
+            - '{{ torrserver_node_ts }}:{{ torrserver_docker_ts }}'
+            - '{{ torrserver_node_torrserver }}:{{ torrserver_docker_torrserver }}'
+        ports:
+            - '{{ torrserver_ts_port }}:{{ torrserver_ts_port }}'
+        restart: unless-stopped

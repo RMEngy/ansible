@@ -1,0 +1,21 @@
+---
+- name: Import tasks for prepare folders
+  ansible.builtin.import_tasks:
+    file: "00-prepare.yml"
+  tags:
+    - torrserver
+
+- name: Import tasks for deploy Torrserver in docker
+  ansible.builtin.import_tasks:
+    file: "10-deploy-app.yml"
+  tags:
+    - torrserver
+
+- name: Import tasks for delete Torrserver in docker from host
+  ansible.builtin.import_tasks:
+    file: "99-delete-app.yml"
+  tags:
+    - never
+    - torrserver-node-clean
+  when:
+    - "'torrserver-node-clean' in ansible_run_tags"

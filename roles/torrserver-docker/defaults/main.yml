@@ -1,0 +1,27 @@
+---
+### Base environment Torrserver
+torrserver_image: "ghcr.io/yourok/torrserver"
+torrserver_image_version: "matrix.133t"
+torrserver_container_name: "torrserver"
+### Directory, volumes and files Torrserver
+torrserver_node_docker_compose: "/opt/docker"
+torrserver_node_docker_compose_app: "{{ torrserver_node_docker_compose }}/torrserver"
+torrserver_node: "/opt/torrserver"
+torrserver_node_torrserver: "{{ torrserver_node }}/torrserver"
+torrserver_node_ts: "{{ torrserver_node }}/ts"
+torrserver_docker_torrserver: "/opt/torrserver"
+torrserver_docker_ts: "/opt/ts"
+### Environment for Torrserver
+# Environment
+torrserver_ts_port: "5665"
+torrserver_ts_dontkill: "1"
+torrserver_ts_httpsauth: "0"
+torrserver_ts_conf_path: "/opt/ts/config"
+torrserver_ts_torr_dir: "/opt/ts/torrents"
+# Environment start list
+torrserver_environment:
+  - "TS_PORT={{ torrserver_ts_port }}"
+  - "TS_DONTKILL={{ torrserver_ts_dontkill }}"
+  - "TS_HTTPAUTH={{ torrserver_ts_httpsauth }}"
+  - "TS_CONF_PATH={{ torrserver_ts_conf_path }}"
+  - "TS_TORR_DIR={{ torrserver_ts_torr_dir }}"

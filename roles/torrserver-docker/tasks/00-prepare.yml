@@ -1,0 +1,12 @@
+- name: Create directory Torrserver
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: directory
+    mode: "{{ item.mode | default('0755') }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+  with_items:
+    - { path: "{{ torrserver_node_docker_compose_app }}" }
+    - { path: "{{ torrserver_node }}" }
+    - { path: "{{ torrserver_node_torrserver }}" }
+    - { path: "{{ torrserver_node_ts }}" }
