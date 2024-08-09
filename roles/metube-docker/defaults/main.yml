@@ -1,0 +1,26 @@
+---
+### Base environment Metube
+metube_image: "ghcr.io/alexta69/metube"
+metube_image_version: "2024-08-07"
+metube_container_name: "metube"
+### Directory, volumes and files Metube
+metube_node_docker_compose: "/opt/docker"
+metube_node_docker_compose_app: "{{ metube_node_docker_compose }}/metube"
+metube_node: "/opt/metube"
+metube_node_downloads: "{{ metube_node }}/downloads"
+metube_docker_downloads: "/downloads"
+metube_node_downloads_owner: "1000"
+metube_node_downloads_group: "1000"
+metube_node_downloads_mode: "0755"
+### Network environment Metube
+metube_port: "8081"
+### Environment for Metube
+# Environment
+metube_uid: "1000"
+metube_gid: "1000"
+metube_umask: "022"
+# Environment start list
+metube_environment:
+  - "UID={{ metube_uid }}"
+  - "GID={{ metube_gid }}"
+  - "UMASK={{ metube_umask }}"

@@ -1,0 +1,12 @@
+- name: Create directory Metube
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: directory
+    mode: "{{ item.mode | default('0755') }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+  with_items:
+    - { path: "{{ metube_node_docker_compose }}" }
+    - { path: "{{ metube_node_docker_compose_app }}" }
+    - { path: "{{ metube_node }}" }
+    - { path: "{{ metube_node_downloads }}", owner: "{{ metube_node_downloads_owner }}", group: "{{ metube_node_downloads_group }}", mode: "{{ metube_node_downloads_mode }}" }

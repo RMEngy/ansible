@@ -1,0 +1,21 @@
+---
+- name: Import tasks for prepare folders
+  ansible.builtin.import_tasks:
+    file: "00-prepare.yml"
+  tags:
+    - metube
+
+- name: Import tasks for deploy Metube in docker
+  ansible.builtin.import_tasks:
+    file: "10-deploy-app.yml"
+  tags:
+    - metube
+
+- name: Import tasks for delete Metube in docker from host
+  ansible.builtin.import_tasks:
+    file: "99-delete-app.yml"
+  tags:
+    - never
+    - metube-node-clean
+  when:
+    - "'metube-node-clean' in ansible_run_tags"

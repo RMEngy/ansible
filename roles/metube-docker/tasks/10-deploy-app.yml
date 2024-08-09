@@ -1,0 +1,22 @@
+---
+- name: Copy docker compose for Metube
+  ansible.builtin.template:
+    src: "docker-compose.metube.yml.j2"
+    dest: "{{ metube_node_docker_compose_app }}/docker-compose.yml"
+    mode: '0600'
+    owner: root
+    group: root
+  register: __metube_node_docker_compose_file
+
+- name: Restart docker compose for Metube
+  community.docker.docker_compose_v2:
+    project_src: "{{ metube_node_docker_compose_app }}"
+    state: restarted
+    files:
+      - docker-compose.yml
+  register: __output_metube_restart
+  when: __metube_node_docker_compose_file.changed
+
+- name: Show results restart
+  ansible.builtin.debug:
+    var: __output_metube_restart

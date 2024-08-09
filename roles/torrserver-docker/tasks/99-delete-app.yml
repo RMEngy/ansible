@@ -4,7 +4,7 @@
     project_src: "{{ torrserver_node_docker_compose_app }}"
     state: absent
     files:
-    - docker-compose.yml
+      - docker-compose.yml
   register: __output_torrserver_down
 
 - name: Show results down

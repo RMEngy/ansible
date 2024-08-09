@@ -1,0 +1,6 @@
+---
+- name: Deploy Metube
+  hosts: metube
+  become: true
+  roles:
+    - metube-docker
