@@ -4,4 +4,9 @@ torrserver:
     prod-torrserver-01a:
       ansible_host: 192.168.3.68
       ansible_user: rmengy
-    
+
+metube:
+  hosts:
+    prod-metube-01a:
+      ansible_host: 192.168.3.104
+      ansible_user: rmengy
